@@ -1,6 +1,7 @@
 package parser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,5 +44,9 @@ public class QueryParser {
         }
 
         return output.reversed();
+
+//        Collections.reverse(output);
+//
+//        return output;
     }
 }
