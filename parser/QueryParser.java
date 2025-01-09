@@ -43,10 +43,10 @@ public class QueryParser {
             output.add(operators.pop());
         }
 
-        return output.reversed();
+//        return output.reversed();
 
-//        Collections.reverse(output);
-//
-//        return output;
+        Collections.reverse(output);
+
+        return output;
     }
 }
