@@ -1,6 +1,9 @@
 package src.vehicles;
 
-public abstract class Vehicle {
+import java.io.Serializable;
+
+public abstract class Vehicle implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected String brand;
     protected String model;
     protected int year;

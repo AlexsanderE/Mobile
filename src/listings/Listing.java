@@ -1,10 +1,12 @@
 package src.listings;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import src.vehicles.Vehicle;
+import src.users.UserProfile;
 
-
-public class Listing {
+public class Listing implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Vehicle vehicle;
     private double price;
     private UserProfile seller;
@@ -17,7 +19,6 @@ public class Listing {
         this.createdAt = LocalDateTime.now();
     }
     
-    // Getters and setters
     public Vehicle getVehicle() {
         return vehicle;
     }

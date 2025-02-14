@@ -1,7 +1,7 @@
 package src.menu;
 
 import src.listings.Listing;
-import src.listings.UserProfile;
+import src.users.UserProfile;
 import src.listings.VehicleMarketplace;
 import src.vehicles.Vehicle;
 import src.vehicles.VehicleFactory;
@@ -63,7 +63,7 @@ public class AddListingCommand implements MenuCommand {
         double price;
         while (true) {
             try {
-                System.out.print("Price: $");
+                System.out.print("Price: bgn");
                 price = Double.parseDouble(scanner.nextLine());
                 if (price > 0) {
                     break;

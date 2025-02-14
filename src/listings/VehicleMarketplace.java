@@ -7,21 +7,21 @@ import src.notifications.NotificationService;
 import src.search.SearchCriteria;
 
 public class VehicleMarketplace {
-    private List<Listing> listings;
+    private ListingManager listingManager;
     private NotificationService notificationService;
     
     public VehicleMarketplace() {
-        this.listings = new ArrayList<>();
+        this.listingManager = new ListingManager();
         this.notificationService = new NotificationService();
     }
     
     public void addListing(Listing listing) {
-        listings.add(listing);
+        listingManager.saveListing(listing);
         notificationService.notifyUsers(listing);
     }
     
     public List<Listing> search(SearchCriteria criteria) {
-        return listings.stream()
+        return listingManager.getAllListings().stream()
             .filter(listing -> criteria.matches(listing.getVehicle()))
             .collect(Collectors.toList());
     }
@@ -31,6 +31,6 @@ public class VehicleMarketplace {
     }
     
     public List<Listing> getAllListings() {
-        return new ArrayList<>(listings);
+        return listingManager.getAllListings();
     }
 } 

@@ -33,4 +33,20 @@ public class VehicleSearchBuilder {
             return price >= min && price <= max;
         };
     }
+    
+    public static SearchCriteria byYearRange(int minYear, int maxYear) {
+        if (minYear > maxYear) {
+            throw new IllegalArgumentException("Minimum year cannot be greater than maximum year");
+        }
+        
+        
+        if (minYear < 1900 || maxYear > 2025) {
+            throw new IllegalArgumentException("Please enter years between 1900 and 2025");
+        }
+        
+        return vehicle -> {
+            int year = vehicle.getYear();
+            return year >= minYear && year <= maxYear;
+        };
+    }
 } 

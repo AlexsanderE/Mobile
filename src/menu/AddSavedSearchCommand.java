@@ -1,6 +1,6 @@
 package src.menu;
 
-import src.listings.UserProfile;
+import src.users.UserProfile;
 import src.search.SearchCriteria;
 import src.search.VehicleSearchBuilder;
 import java.util.Scanner;

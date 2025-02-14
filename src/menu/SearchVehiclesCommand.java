@@ -27,8 +27,9 @@ public class SearchVehiclesCommand implements MenuCommand {
         System.out.println("\n=== Search Vehicles ===");
         System.out.println("1. Search by brand");
         System.out.println("2. Search by price range");
-        System.out.println("3. Search by year");
-        System.out.println("4. Combined search");
+        System.out.println("3. Search by exact year");
+        System.out.println("4. Search by year range");
+        System.out.println("5. Combined search");
         System.out.print("Choice: ");
         
         SearchCriteria criteria = null;
@@ -40,9 +41,9 @@ public class SearchVehiclesCommand implements MenuCommand {
                     criteria = VehicleSearchBuilder.byBrand(scanner.nextLine());
                     break;
                 case 2:
-                    System.out.print("Enter minimum price: $");
+                    System.out.print("Enter minimum price: bgn");
                     double min = Double.parseDouble(scanner.nextLine());
-                    System.out.print("Enter maximum price: $");
+                    System.out.print("Enter maximum price: bgn");
                     double max = Double.parseDouble(scanner.nextLine());
                     criteria = VehicleSearchBuilder.byPriceRange(min, max);
                     break;
@@ -51,6 +52,13 @@ public class SearchVehiclesCommand implements MenuCommand {
                     criteria = VehicleSearchBuilder.byYear(Integer.parseInt(scanner.nextLine()));
                     break;
                 case 4:
+                    System.out.print("Enter minimum year: ");
+                    int minYear = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Enter maximum year: ");
+                    int maxYear = Integer.parseInt(scanner.nextLine());
+                    criteria = VehicleSearchBuilder.byYearRange(minYear, maxYear);
+                    break;
+                case 5:
                     criteria = buildCombinedSearch();
                     break;
                 default:
@@ -99,7 +107,7 @@ public class SearchVehiclesCommand implements MenuCommand {
         System.out.println("\nSearch Results:");
         for (Listing listing : listings) {
             Vehicle vehicle = listing.getVehicle();
-            System.out.printf("%s %s %d - $%.2f%n",
+            System.out.printf("%s %s %d - bgn%.2f%n",
                 vehicle.getBrand(),
                 vehicle.getModel(),
                 vehicle.getYear(),

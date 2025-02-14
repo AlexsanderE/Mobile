@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Menu {
     private final List<MenuCommand> commands;
     private final Scanner scanner;
+    private boolean loggedOut = false;
     
     public Menu(Scanner scanner) {
         this.commands = new ArrayList<>();
@@ -17,8 +18,12 @@ public class Menu {
         commands.add(command);
     }
     
+    public void setLoggedOut(boolean loggedOut) {
+        this.loggedOut = loggedOut;
+    }
+    
     public void show() {
-        while (true) {
+        while (!loggedOut) {
             System.out.println("\nPlease select an option:");
             for (int i = 0; i < commands.size(); i++) {
                 System.out.printf("%d. %s%n", i + 1, commands.get(i).getDescription());

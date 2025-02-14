@@ -29,7 +29,7 @@ public class ViewAllListingsCommand implements MenuCommand {
         
         for (Listing listing : listings) {
             Vehicle vehicle = listing.getVehicle();
-            System.out.printf("%s %s %d - $%.2f (Seller: %s)%n",
+            System.out.printf("%s %s %d - bgn%.2f (Seller: %s)%n",
                 vehicle.getBrand(),
                 vehicle.getModel(),
                 vehicle.getYear(),

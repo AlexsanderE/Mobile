@@ -1,7 +1,7 @@
 package src.notifications;
 
 import src.listings.Listing;
-import src.listings.UserProfile;
+import src.users.UserProfile;
 
 public class EmailNotification implements NotificationStrategy {
     @Override
@@ -10,6 +10,6 @@ public class EmailNotification implements NotificationStrategy {
         System.out.println("New listing matches your search!");
         System.out.println("Vehicle: " + listing.getVehicle().getBrand() + " " + 
                           listing.getVehicle().getModel());
-        System.out.println("Price: $" + listing.getVehicle().getPrice());
+        System.out.println("Price: bgn" + listing.getVehicle().getPrice());
     }
 } 
