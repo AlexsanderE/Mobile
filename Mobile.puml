@@ -1,0 +1,116 @@
+@startuml Vehicle Marketplace
+
+' Classes
+abstract class Vehicle {
+  -brand: String
+  -model: String
+  -year: int
+  -price: double
+  +getBrand(): String
+  +getModel(): String
+  +getYear(): int
+  +getPrice(): double
+}
+
+class Car extends Vehicle {
+  -bodyType: String
+  -fuelType: String
+}
+
+class Truck extends Vehicle {
+  -cargoCapacity: double
+  -truckType: String
+}
+
+class UserProfile {
+  -username: String
+  -email: String
+  -phone: String
+  -password: String
+  -savedSearches: List<SearchCriteria>
+  -pendingNotifications: List<Listing>
+  -notificationPreference: NotificationType
+}
+
+class Listing {
+  -vehicle: Vehicle
+  -price: double
+  -seller: UserProfile
+  -createdAt: LocalDateTime
+}
+
+class VehicleMarketplace {
+  -listingManager: ListingManager
+  -notificationService: NotificationService
+  +addListing(listing: Listing)
+  +search(criteria: SearchCriteria): List<Listing>
+}
+
+interface NotificationStrategy {
+  +notify(user: UserProfile, listing: Listing)
+}
+
+class EmailNotification implements NotificationStrategy
+class SMSNotification implements NotificationStrategy
+
+class NotificationService {
+  -subscribers: List<UserProfile>
+  -userPreferences: Map<UserProfile, NotificationType>
+  +subscribe(user: UserProfile, type: NotificationType)
+  +unsubscribe(user: UserProfile)
+  +notifyUsers(listing: Listing)
+}
+
+enum NotificationType {
+  EMAIL
+  SMS
+  BOTH
+  NONE
+}
+
+interface SearchCriteria {
+  +matches(vehicle: Vehicle): boolean
+  +and(other: SearchCriteria): SearchCriteria
+  +or(other: SearchCriteria): SearchCriteria
+}
+
+class VehicleSpecification<T> implements SearchCriteria {
+  -getter: Function<Vehicle, T>
+  -value: T
+  -comparator: BiFunction<T, T, Boolean>
+}
+
+' Menu System
+interface MenuCommand {
+  +execute()
+  +getDescription(): String
+}
+
+class Menu {
+  -commands: List<MenuCommand>
+  +addCommand(command: MenuCommand)
+  +show()
+}
+
+' Relationships
+VehicleMarketplace --> ListingManager
+VehicleMarketplace --> NotificationService
+NotificationService --> "2" NotificationStrategy
+NotificationService --> "*" UserProfile
+Listing --> "1" Vehicle
+Listing --> "1" UserProfile
+UserProfile --> "*" SearchCriteria
+UserProfile --> "*" Listing : pendingNotifications
+Menu --> "*" MenuCommand
+
+note right of NotificationType
+  Determines how users
+  receive notifications
+end note
+
+note right of SearchCriteria
+  Flexible search criteria
+  with composable filters
+end note
+
+@enduml
